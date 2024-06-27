@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose";
-import jwt from 'json-web-token'
+import jwt from 'jsonwebtoken'
 import bcrypt from'bcrypt'
 const userSchema = new Schema(
     {
@@ -75,6 +75,7 @@ userSchema.methods.generateAccessToken = function(){
         }
     )
 }
+
 userSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
         {
