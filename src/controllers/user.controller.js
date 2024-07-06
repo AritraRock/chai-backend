@@ -154,8 +154,8 @@ const logoutUser = asyncHandler(async(req,res)=>{
     await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set : {
-                refreshToken: undefined
+            $unset : {
+                refreshToken: 1
             }
         },
         {
@@ -203,7 +203,7 @@ const refreshAccessToken= asyncHandler(async(req,res)=>{
         }
     
         if(incomingRefreshToken!== user?.refreshToken){
-            throw new ApiError(401,"Rrefresh token is expired or used")
+            throw new ApiError(401,"Refresh token is expired or used")
         }
     
         const options = {
@@ -215,12 +215,12 @@ const refreshAccessToken= asyncHandler(async(req,res)=>{
     
         return res
         .status(200)
-        .cookie("accessToken", accessToken, options)
+        .cookie("accessToken", newAccessToken, options)
         .cookie("refreshToken", newRefreshToken, options)
         .json(
             new ApiResponse(
                 200,
-                {accessToken, refreshToken:newRefreshToken},
+                {newAccessToken, refreshToken:newRefreshToken},
                 "Access token refreshed"
             )
         )
@@ -410,7 +410,7 @@ const getWatchHistory = asyncHandler(async(req,res)=>{
     const user = await User.aggregate([
         {
             $match:{
-                _id : mongoose.Types.ObjectId.createFromHexString(req.user._id)
+                _id : new mongoose.Types.ObjectId(req.user._id)
             }
         },
         {
