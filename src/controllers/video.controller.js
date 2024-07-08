@@ -110,16 +110,15 @@ const updateVideo = asyncHandler(async (req, res) => {
     
     if(!title||!description||!thumbnailLocalPath) throw new ApiError(401,"Provide all inputs")
 
-    const oldVideo = await Video.findById(videoId);
+    const oldVideo = await Video.findByIdAndUpdate(videoId);
     if (!oldVideo) {
         throw new ApiError(404, "Video not found");
     }
-    const oldThumbnailPath = oldVideo.thumbnail.split("/").pop().replace(".jpg","")
+    const oldThumbnailPath = oldVideo.thumbnail.split("/").pop().split(".")[0]
     
     console.log("oldThumbnailPath: ",oldThumbnailPath)
     if(oldThumbnailPath) {
-        const deleted = await deleteSingleFromCloudinary(oldThumbnailPath)
-        console.log(deleted)
+        await deleteSingleFromCloudinary(oldThumbnailPath,"image")
     }
 
     const thumbnail = await uploadOnCloudinary(thumbnailLocalPath)
@@ -144,6 +143,27 @@ const updateVideo = asyncHandler(async (req, res) => {
 const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
     //TODO: delete video
+    const oldVideo = await Video.findByIdAndDelete(videoId);
+    if (!oldVideo) {
+        throw new ApiError(404, "Video not found");
+    }
+
+    //deleting video from cloudinary
+    const oldVideoPublicID = oldVideo.videoFile.split("/").pop().split(".")[0]
+    console.log("oldVideoPublicID: ",oldVideoPublicID)
+    if(oldVideoPublicID) {
+        await deleteSingleFromCloudinary(oldVideoPublicID,"video")
+    }
+    //deleting thumbnail image from cloudinary
+    const oldThumbnailPublicID= oldVideo.thumbnail.split("/").pop().split(".")[0]
+    console.log("oldThumbnailPublicID: ",oldThumbnailPublicID)
+    if(oldThumbnailPublicID) {
+        await deleteSingleFromCloudinary(oldThumbnailPublicID,"image")
+    }
+    
+    return res
+    .status(200)
+    .json(new ApiResponse(200,"Video deleted successfully"))
 })
 
 const togglePublishStatus = asyncHandler(async (req, res) => {
