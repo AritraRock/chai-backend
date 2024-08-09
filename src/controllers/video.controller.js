@@ -9,7 +9,7 @@ import {uploadOnCloudinary, deleteSingleFromCloudinary} from "../utils/cloudinar
 
 const getAllVideos = asyncHandler(async (req, res) => {
     const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
-    console.log(userId);
+    // console.log(userId);
     const pipeline = [];
 
     // for using Full Text based search u need to create a search index in mongoDB atlas
@@ -19,13 +19,14 @@ const getAllVideos = asyncHandler(async (req, res) => {
     // here the name of search index is 'search-videos'
     if (query) {
         pipeline.push({
-            $search: {                
-                // "index": "<index-name>",
-                // {}
+            $search: {
+                "index": "default",
                 "text": {
-                    "query": query,
-                    "path": ["title", "description"], //search only on title, desc
-                    "fuzzy": {"maxEdits":2}
+                  "query": query,
+                  "path": ["title","description"],
+                  "fuzzy": {
+                    "maxEdits": 1
+                  }
                 }
             }
         });
@@ -36,11 +37,11 @@ const getAllVideos = asyncHandler(async (req, res) => {
             throw new ApiError(400, "Invalid userId");
         }
 
-        pipeline.push({
-            $match: {
-                owner: new mongoose.Types.ObjectId(userId)
-            }
-        });
+        // pipeline.push({
+        //     $match: {
+        //         owner: new mongoose.Types.ObjectId(userId)
+        //     }
+        // });
     }
 
     // fetch videos only that are set isPublished as true
