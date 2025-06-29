@@ -73,10 +73,6 @@ twitube-backend/
 ├── .env.sample
 └── app.js
 
-yaml
-Copy
-Edit
-
 ---
 
 ## 🧪 API Overview
