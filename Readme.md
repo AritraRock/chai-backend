@@ -177,7 +177,7 @@ All endpoints are RESTful and organized by module. This project uses `Bearer JWT
 
 ---
 
-📬 For API testing and import, use this [Postman Collection](#) (you can link your `.postman_collection.json` if public).
+📬 For API testing and import, use this [Postman Collection](#https://www.postman.com/aritrabts/apis/documentation/0002gq2/backend-of-twitube)
 
 
 ---
@@ -200,27 +200,30 @@ npm install
 Create your .env file:
 ```cp .env.sample .env```
 Then add the following values:
-MONGODB_URI
-JWT_SECRET
-CLOUDINARY_API_KEY
-CLOUDINARY_SECRET
+- MONGODB_URI
+- JWT_SECRET
+- CLOUDINARY_API_KEY
+- CLOUDINARY_SECRET
+
+Start the server:
 ```npm run dev```
+
 Backend will be available at:
-http://localhost:3000
+```http://localhost:3000```
 
 
-📈 Performance Optimizations
+## 📈 Performance Optimizations
 Optimization	Result
 Cloudinary uploads	50% faster media processing
 Atlas Search	30% faster full-text queries
 Aggregation pipelines	60% less CPU load on queries
 
-🙌 Contribution
+## 🙌 Contribution
 This is a backend-only, solo-developed project aimed at showcasing API design, performance tuning, and modern Node.js backend architecture.
 
 Feel free to fork or explore for learning and inspiration.
 
-👨‍💻 Author
+## 👨‍💻 Author
 Aritra Ray
 B.Tech – Industrial Engineering
 IIT Kharagpur (2025)
@@ -231,5 +234,5 @@ LinkedIn: aritraray
 
 Email: aritrabts@gmail.com
 
-🏷️ Tags
+## 🏷️ Tags
 #BackendOnly #NodeJS #Express #MongoDB #Cloudinary #API #YouTubeClone #TwitterClone #Twitube #IITKGP
