@@ -62,6 +62,7 @@
 
 ## 📂 Folder Structure
 
+```
 twitube-backend/
 ├── controllers/
 ├── models/
@@ -72,7 +73,7 @@ twitube-backend/
 ├── config/
 ├── .env.sample
 └── app.js
-
+```
 
 ---
 
