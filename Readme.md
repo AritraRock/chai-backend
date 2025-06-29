@@ -80,9 +80,104 @@ twitube-backend/
 
 All endpoints are RESTful and organized by module. This project uses `Bearer JWT` for authenticated routes.
 
-(See full API breakdown in earlier section)
+---
 
-📬 For API testing and import, use this [Postman Collection](#) *(link here if public)*
+### 👤 User Routes
+
+| Method | Endpoint                 | Description                         |
+|--------|--------------------------|-------------------------------------|
+| POST   | `/users/register`        | Register a new user (with avatar)   |
+| POST   | `/users/login`           | Log in and receive JWT token        |
+| POST   | `/users/logout`          | Log out and destroy session         |
+| POST   | `/users/refresh-token`   | Get new access token via refresh    |
+| GET    | `/users/current-user`    | Get current authenticated user      |
+| POST   | `/users/change-password` | Change current user's password      |
+| GET    | `/users/c/:username`     | Get a public channel by username    |
+| GET    | `/users/history`         | Get watch/view history              |
+
+---
+
+### 🎬 Video Routes
+
+| Method | Endpoint                            | Description                         |
+|--------|--------------------------------------|-------------------------------------|
+| POST   | `/videos/`                           | Upload a new video                  |
+| GET    | `/videos/:id`                        | Get video details by ID             |
+| PATCH  | `/videos/:id`                        | Update video info                   |
+| DELETE | `/videos/:id`                        | Delete a video                      |
+| PATCH  | `/videos/toggle/publish/:id`         | Toggle video publish status         |
+
+---
+
+### 💬 Comment Routes
+
+| Method | Endpoint                             | Description                          |
+|--------|---------------------------------------|--------------------------------------|
+| POST   | `/comments/:videoId`                 | Add comment to a video               |
+| GET    | `/comments/:videoId`                 | Get all comments for a video         |
+| PATCH  | `/comments/c/:commentId`             | Update a comment                     |
+| DELETE | `/comments/c/:commentId`             | Delete a comment                     |
+
+---
+
+### 🐦 Tweet Routes
+
+| Method | Endpoint                            | Description                         |
+|--------|--------------------------------------|-------------------------------------|
+| POST   | `/tweets/`                           | Create a new tweet                  |
+| GET    | `/tweets/user/:userId`               | Get tweets by a user                |
+| PATCH  | `/tweets/:tweetId`                   | Update a tweet                      |
+| DELETE | `/tweets/:tweetId`                   | Delete a tweet                      |
+
+---
+
+### 🎮 Like Routes
+
+| Method | Endpoint                                  | Description                         |
+|--------|--------------------------------------------|-------------------------------------|
+| POST   | `/likes/toggle/v/:videoId`                | Like/unlike a video                 |
+| POST   | `/likes/toggle/c/:commentId`              | Like/unlike a comment               |
+| POST   | `/likes/toggle/t/:tweetId`                | Like/unlike a tweet                 |
+| GET    | `/likes/videos`                           | Get all liked videos by user        |
+
+---
+
+### 📺 Playlist Routes
+
+| Method | Endpoint                                                   | Description                            |
+|--------|-------------------------------------------------------------|----------------------------------------|
+| POST   | `/playlist/`                                               | Create a new playlist                  |
+| GET    | `/playlist/user/:userId`                                   | Get all playlists for a user           |
+| GET    | `/playlist/:playlistId`                                    | Get details of a specific playlist     |
+| PATCH  | `/playlist/:playlistId`                                    | Update playlist name/desc              |
+| DELETE | `/playlist/:playlistId`                                    | Delete a playlist                      |
+| PATCH  | `/playlist/add/:videoId/:playlistId`                       | Add video to playlist                  |
+| PATCH  | `/playlist/remove/:videoId/:playlistId`                    | Remove video from playlist             |
+
+---
+
+### 🔔 Subscription Routes
+
+| Method | Endpoint                                  | Description                          |
+|--------|--------------------------------------------|--------------------------------------|
+| POST   | `/subscriptions/c/:channelId`             | Subscribe/unsubscribe to a channel   |
+| GET    | `/subscriptions/u/:userId`                | Get channels user subscribed to      |
+| GET    | `/subscriptions/c/:channelId`             | Get all subscribers of a channel     |
+
+---
+
+### 📊 Dashboard & Utility
+
+| Method | Endpoint             | Description                      |
+|--------|----------------------|----------------------------------|
+| GET    | `/dashboard/videos`  | Get all uploaded videos          |
+| GET    | `/dashboard/stats`   | Get overall channel statistics   |
+| GET    | `/healthcheck`       | Server healthcheck endpoint      |
+
+---
+
+📬 For API testing and import, use this [Postman Collection](#) (you can link your `.postman_collection.json` if public).
+
 
 ---
 
