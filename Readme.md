@@ -1,82 +1,66 @@
-# 🎥 Twitube Backend – Full-Stack Video & Tweet Hosting API (Node.js + MongoDB)
+# 🎥 Twitube Backend – Video & Tweet Hosting API (Node.js + MongoDB)
 
-Twitube is a full-featured backend application inspired by platforms like **YouTube** and **Twitter**, offering powerful video hosting, tweeting, playlisting, and social interaction APIs — built with **Node.js**, **Express**, and **MongoDB**.
+**Twitube** is a robust, production-ready **backend API** built using **Node.js**, **Express**, and **MongoDB**, inspired by the core features of **YouTube** and **Twitter**. It supports scalable media upload, user interactions, and content management, designed with performance and modularity in mind.
 
-This project demonstrates strong backend architecture, cloud media management, and performance optimization using real-world tools like **Cloudinary**, **JWT**, and **MongoDB Atlas Search**.
-
----
-
-## 📌 Project Summary
-
-> **Dec 2023 – Jan 2024**  
-> Independently designed and implemented by **Aritra Ray**
-
-- ⚡ Built a full-stack backend system supporting both video and tweet modules  
-- 🚀 Boosted media upload performance by 50% using **Cloudinary**  
-- 🔍 Integrated **MongoDB Atlas Search** to improve search speed by 30%  
-- 📉 Reduced backend load by 60% via optimized **MongoDB aggregation pipelines**
+> 🛠️ Built independently by **Aritra Ray** as a **backend-only project**  
+> 📆 Timeline: Dec 2023 – Jan 2024
 
 ---
 
-## 🌟 Core Features
+## 🚀 Key Highlights
+
+- 📁 Video and Tweet hosting APIs with role-based user management
+- ⚙️ Cloudinary integration for optimized media uploads (50% faster)
+- 🔍 MongoDB Atlas Search for full-text search (30% improvement)
+- 📉 Aggregation pipelines for analytics and reduced server load (60% gain)
+
+---
+
+## 🧩 Core Backend Features
 
 ### 👤 User Management
-- Secure signup, login, logout (JWT + bcrypt)
-- Password reset with email OTP
-- Profile avatar, cover photo, and personal info updates
+- Signup, login, logout (JWT-based auth)
+- Password reset via email OTP
+- Profile management: avatar, cover, user details
 - Watch history tracking
 
-### 🎬 Video Functionality
-- Upload, edit, delete, and publish/unpublish videos
-- Video listing with pagination, filters, and search (Atlas Search)
+### 🎬 Video Module
+- Upload, edit, delete, publish/unpublish
+- Pagination, filtering, and search (Atlas Search)
 - Like/unlike videos
-- Add comments to videos
+- Comment on videos
 
-### 🐦 Tweet Functionality
+### 🐦 Tweet Module
 - Post, update, delete tweets
 - Like/unlike tweets
-- View user-specific tweet timelines
+- View tweet timeline by user
 
-### 📁 Playlist System
-- Create and manage personal playlists
-- Add/remove videos from playlists
-- Public/private playlist visibility
+### 📁 Playlist Module
+- Create/edit/delete playlists
+- Add/remove videos
+- Public/private support
 
-### 🔔 Subscriptions
-- Subscribe to other users/channels
-- View subscriber/following lists
-- Get channel analytics (views, likes, videos)
-
-### 📊 Analytics Dashboard
-- Aggregated metrics via MongoDB pipelines
-- Views, likes, subscribers, uploads, tweets, playlists
+### 📊 Analytics & Subscriptions
+- Channel stats: total views, likes, subscribers
+- Subscribe/unsubscribe to channels
+- Aggregated metrics via MongoDB pipeline
 
 ---
 
-## ⚙️ Tech Stack
+## 🔧 Tech Stack
 
-| Layer          | Technology                         |
-|----------------|------------------------------------|
-| Backend        | Node.js, Express.js                |
-| Database       | MongoDB + Mongoose ODM             |
-| Media Upload   | Cloudinary                         |
-| Authentication | JWT + bcrypt                       |
-| Search         | MongoDB Atlas Search               |
-| Dev Tools      | dotenv, Postman, Nodemon           |
-
----
-
-## 🔧 Performance Optimizations
-
-| Optimization                | Impact                       |
-|----------------------------|------------------------------|
-| Cloudinary async uploads   | 50% faster media uploads     |
-| Atlas Search indexing      | 30% better search response   |
-| Aggregation pipelines      | 60% lower backend CPU load   |
+| Layer        | Technology                         |
+|--------------|------------------------------------|
+| Backend      | Node.js, Express.js                |
+| Database     | MongoDB (with Mongoose ODM)        |
+| Media Upload | Cloudinary                         |
+| Auth & Security | JWT, bcrypt, cookie-parser      |
+| Search       | MongoDB Atlas Search               |
+| Dev Tools    | Postman, dotenv, nodemon           |
 
 ---
 
-## 📁 Folder Structure
+## 📂 Folder Structure
 
 twitube-backend/
 ├── controllers/
@@ -95,31 +79,27 @@ Edit
 
 ---
 
-## 🧪 API Documentation
+## 🧪 API Overview
 
-All routes follow RESTful conventions using JSON.
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST   | /api/auth/signup     | Register new user           |
-| POST   | /api/auth/login      | Login and receive token     |
-| POST   | /api/video           | Upload a video              |
-| GET    | /api/video           | List videos with filters    |
-| POST   | /api/tweet           | Create a tweet              |
-| GET    | /api/tweet/:id       | Get tweet by user           |
-| POST   | /api/playlist        | Create playlist             |
-| GET    | /api/user/:id/stats  | Dashboard metrics           |
-
-📎 You can integrate these APIs with Postman or a frontend client (e.g., React).
+| Method | Endpoint             | Description                          |
+|--------|----------------------|--------------------------------------|
+| POST   | /api/auth/signup     | Register new user                    |
+| POST   | /api/auth/login      | Login and receive token              |
+| POST   | /api/video           | Upload a new video                   |
+| GET    | /api/video           | List/search videos                   |
+| POST   | /api/tweet           | Create a tweet                       |
+| GET    | /api/tweet/:id       | Get tweets by user                   |
+| POST   | /api/playlist        | Create a playlist                    |
+| GET    | /api/user/:id/stats  | View channel stats and analytics     |
 
 ---
 
-## 🧪 Running Locally
+## 🛠️ Running the Backend Locally
 
 ### Prerequisites
 - Node.js (v16+)
-- MongoDB (local or Atlas)
-- Cloudinary account
+- MongoDB (Atlas or local)
+- Cloudinary account for media storage
 
 ### Setup Instructions
 
@@ -127,7 +107,7 @@ All routes follow RESTful conventions using JSON.
 git clone https://github.com/yourusername/twitube-backend.git
 cd twitube-backend
 npm install
-Create a .env file using the sample:
+Copy environment variables:
 
 bash
 Copy
@@ -139,27 +119,32 @@ MONGODB_URI
 
 JWT_SECRET
 
-CLOUDINARY_API_KEY / SECRET
+CLOUDINARY_API_KEY, CLOUDINARY_SECRET
 
-Then run:
+Run the server:
 
 bash
 Copy
 Edit
 npm run dev
-App runs at http://localhost:3000
+Backend will be available at http://localhost:3000
+
+📈 Performance Optimizations
+Optimization	Result
+Cloudinary uploads	50% faster media processing
+Atlas Search	30% faster full-text queries
+Aggregation pipelines	60% less CPU load on queries
 
 🙌 Contribution
-This is a solo project designed to demonstrate scalable backend architecture and cloud-based media processing. Feel free to fork, improve, or learn from the codebase.
+This is a backend-only, solo-developed project aimed at showcasing API design, performance tuning, and modern Node.js backend architecture.
+
+Feel free to fork or explore for learning and inspiration.
 
 👨‍💻 Author
 Aritra Ray
 B.Tech – Industrial Engineering
 IIT Kharagpur (2025)
+GitHub • LinkedIn • Email
 
-GitHub: @AritraRock
-
-LinkedIn: aritraray
-
-Email: aritrabts@gmail.com
-
+🏷️ Tags
+#BackendOnly #NodeJS #Express #MongoDB #Cloudinary #API #YouTubeClone #TwitterClone #Twitube #IITKGP
